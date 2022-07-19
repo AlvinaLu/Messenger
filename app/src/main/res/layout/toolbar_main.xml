@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:navigationIcon="@drawable/ic_chevronleft"
+    app:title="@string/messenger"
+    style="@style/TextAppearance.App.Subtitle1"
+    app:titleTextColor="@color/gray"
+    app:menu="@menu/main"
+    ></androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.example.messenger.ui.settings.ProfileStatusPreference
+        android:key="profile_status"
+        android:singleLine="true"
+        android:inputType="text"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:title="Profile status"
+        android:defaultValue="Available"
+        android:summary="Set profile status (visible to contacts)."/>
+
+</PreferenceScreen>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row_messages"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="100sp"
+    tools:context=".ui.chat.ChatActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:paddingStart="8sp"
+        android:padding="8sp"
+        android:paddingBottom="8sp"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--    <androidx.cardview.widget.CardView -->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:layout_marginStart="8sp"-->
+<!--        android:layout_marginTop="8sp"-->
+<!--        android:layout_marginEnd="100sp"-->
+<!--        android:layout_marginBottom="8sp"-->
+<!--        app:cardBackgroundColor="@color/light_tone"-->
+<!--        app:cardCornerRadius="8sp"-->
+<!--        app:cardElevation="3dp"-->
+<!--        app:cardUseCompatPadding="false"-->
+<!--        app:contentPadding="5sp"-->
+<!--        tools:context=".ui.chat.ChatActivity">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_receive_message"
+            android:padding="8sp">
+
+            <TextView
+                android:id="@+id/txt_receive_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="8sp"
+                android:paddingEnd="16sp"
+                android:paddingTop="8sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="This is sent message" />
+
+            <TextView
+                android:id="@+id/txt_receive_message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16:25"
+                android:textColor="#7E807F"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_receive_message" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

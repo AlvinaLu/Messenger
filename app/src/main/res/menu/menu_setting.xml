@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.android.example.messenger.ScrollingActivity">
+
+    <item
+        android:id="@+id/action_menu"
+        android:icon="@drawable/ic_menuvertical"
+        android:title=""
+        app:showAsAction="ifRoom">
+        <menu>
+
+            <item
+                android:id="@+id/action_delete"
+                android:orderInCategory="100"
+                android:title="@string/detete_photo"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_logout"
+                android:orderInCategory="100"
+                android:title="@string/action_logout"
+                app:showAsAction="never" />
+
+        </menu>
+
+    </item>
+</menu>
