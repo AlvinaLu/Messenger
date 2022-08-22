@@ -1,7 +1,7 @@
 package com.android.example.messenger.ui.auth
 
 import com.android.example.messenger.data.local.AppPreferences
-import com.android.example.messenger.data.vo.UserVO
+import com.android.example.messenger.data.response.UserVO
 
 interface AuthInteractor {
 

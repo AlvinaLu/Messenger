@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.android.example.messenger.data.local.AppPreferences
 import com.android.example.messenger.ui.auth.AuthInteractor
+import com.android.example.messenger.utils.SecureUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -41,13 +42,14 @@ class SignUpPresenterImpl(private val view: SignUpView): SignUpPresenter,
 
     override fun executeSignUp(username: String, phoneNumber: String, password: String) {
         view.showProgress()
-        var i = 0
-
         if(username.length > 20){
             view.hideProgress()
             view.setUsernameTooLongError()
         }else{
-            interactor.signUp(username, phoneNumber, password, this)
+            val hashPassword = SecureUtils.getSecurePassword(password)
+            if (hashPassword != null) {
+                interactor.signUp(username, phoneNumber, hashPassword, this)
+            }
 
         }
     }

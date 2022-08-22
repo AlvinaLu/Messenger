@@ -1,13 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pinned"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:layout_marginBottom="24sp"
+        android:layout_marginTop="8sp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_pinned">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imbtn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp"
+            app:cardBackgroundColor="@color/light_box"
+            android:outlineSpotShadowColor="@color/gray"
+            android:padding="4sp"
+            app:cardElevation="4sp"
+            app:cardCornerRadius="4sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4sp"
+                android:paddingStart="8sp"
+                android:paddingEnd="8sp"
+                android:paddingBottom="4sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                android:text="+" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_conversations"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_group"/>
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_contacts"
         android:layout_width="wrap_content"
@@ -15,6 +85,34 @@
         android:layout_margin="@dimen/default_margin"
         android:src="@drawable/ic_plus_icon"
         app:tint="@color/gray"
-        app:layout_anchor="@id/rv_conversations"
-        app:layout_anchorGravity="bottom|right|end"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_gravity="center_horizontal"
+        app:layout_anchorGravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/gray"
+        android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+        android:textSize="18sp"
+        android:layout_margin="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

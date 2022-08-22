@@ -1,19 +1,17 @@
 package com.android.example.messenger
 
 import android.app.Application
-import com.android.example.messenger.ui.experimental.AppWebApi
-import com.android.example.messenger.ui.experimental.ExperimentalDatabase
-import com.android.example.messenger.ui.experimental.ExperimentalRepository
+import com.android.example.messenger.data.AppWebApi
+import com.android.example.messenger.data.db.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
 class ChatterApp: Application() {
-    val applicationScope = CoroutineScope(SupervisorJob())
-    val database by lazy { ExperimentalDatabase.getDatabase(this, applicationScope) }
+    val database by lazy { AppDatabase.getDatabase(this) }
     val webApi by lazy { AppWebApi.getApiService()}
-    val repositoryDao by lazy { ExperimentalRepository(database.contactsDao(), webApi, this) }
+    val contactsRepository by lazy { ContactsRepository(database.contactsDao(), webApi, this) }
+    val conversationsRepository by lazy { ConversationRepository(database.conversationDao(), database.messageDao(),  webApi, this)}
+    val messagesRepository by lazy { MessagesRepository(database.messageDao(), webApi, this) }
+    val categoryRepository by lazy { CategoryRepository(database.categoryDao(), this) }
 
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

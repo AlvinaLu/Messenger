@@ -1,11 +1,12 @@
 package com.android.example.messenger.ui.setting
 
-import android.content.ClipData
+import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.View
 import android.view.Window
@@ -14,7 +15,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuView
 import androidx.core.net.toUri
 import com.android.example.messenger.R
 import com.android.example.messenger.data.local.AppPreferences
@@ -22,11 +22,12 @@ import com.android.example.messenger.databinding.ActivitySettingBinding
 import com.android.example.messenger.utils.message.avatar.CompressFile
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -42,26 +43,23 @@ class SettingsActivity : AppCompatActivity(), SettingView {
     var photoUrl: String = ""
     var compressor = CompressFile()
 
-    private val imageView: ImageView by lazy {
-        findViewById<ImageView>(R.id.firebaseImage)
-    }
-    private val textView: TextView by lazy {
-        findViewById<TextView>(R.id.text_setting)
-    }
 
-    private val selectPictureLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uriToFile(this, uri, "select_image_from_gallery")?.let { file ->
-                compressor.compressImage(file.absolutePath, 0.5)
+    private var launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            CropImage.getActivityResult(result.data)?.let { cropResult ->
+                uriToFile(this, cropResult.uri, "select_image_from_gallery")?.let { file->
+                    compressor.compressImage(file.absolutePath, 0.5)
 
 
-                setImage(imageView, file.absolutePath)
+                    setImage(binding.firebaseImage, file.absolutePath)
 
-                imageUri = file.toUri()
+                    imageUri = file.toUri()
 
-                uploadImage()
+                    uploadImage()
+                }
             }
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
@@ -72,8 +70,6 @@ class SettingsActivity : AppCompatActivity(), SettingView {
         setContentView(binding.root)
 
         presenter = SettingPresenterImpl(this)
-
-
 
         setSupportActionBar(binding.topAppBar)
 
@@ -90,41 +86,56 @@ class SettingsActivity : AppCompatActivity(), SettingView {
             onBackPressed()
 
         }
-
-
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_delete -> {
-                    Toast.makeText(this, "Delete", Toast.LENGTH_LONG).show()
+                    saveImgUrl("none")
+                    Toast.makeText(this, "Deleted", Toast.LENGTH_LONG).show()
                     true
                 }
                 R.id.action_logout -> {
-                    Toast.makeText(this, "Log out", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "TODO", Toast.LENGTH_LONG).show()
                     true
                 }
                 else -> false
             }
         }
 
-
-
         preferences = AppPreferences.create(this)
         checkImageExist()
-        binding.textSetting.text = preferences.userDetails.notificationToken
+        binding.phoneSetting.text = preferences.userDetails.phoneNumber
+        setupHyperlink()
 
 
         binding.toolbarLayout.isTitleEnabled = true
         binding.toolbarLayout.title = preferences.userDetails.username
 
+        binding.toolbarLayout
+
+
         binding.fabAddImage.setOnClickListener {
 
-            selectPictureLauncher.launch("image/*")
+            val intent = CropImage
+                .activity()
+                .setAspectRatio(1, 1)
+                .setRequestedSize(550, 550)
+                .setCropShape(CropImageView.CropShape.RECTANGLE)
+                .getIntent(this)
+
+            launcher.launch(intent)
+
         }
+
     }
 
+    private fun setupHyperlink() {
+        binding.designSetting.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_setting, menu)
+        menuInflater.inflate(R.menu.menu_setting, menu)
         binding.appBar.addOnOffsetChangedListener(OnOffsetChangedListener{appBar, verticalOffset ->
             if (verticalOffset >= 0) {
                 supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_chevronleft_white)
@@ -147,7 +158,7 @@ class SettingsActivity : AppCompatActivity(), SettingView {
         val url = preferences.userDetails.imgUrl
         if (url != null && url.isNotEmpty()) {
             Picasso.get().load(url)
-                .error(R.drawable.ic_chevronleft)
+                .error(R.drawable.add_photo)
                 .into(binding.firebaseImage)
         }
     }
@@ -173,6 +184,7 @@ class SettingsActivity : AppCompatActivity(), SettingView {
                 }
         }
     }
+
 
     override fun showProgress() {
         binding.progressBarSetting.visibility = View.VISIBLE

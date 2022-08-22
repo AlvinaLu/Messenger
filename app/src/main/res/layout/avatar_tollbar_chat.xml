@@ -33,7 +33,8 @@
                     android:id="@+id/tv_username_toolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
+                    android:maxLines="1"
                     android:textColor="@color/gray"
                     tools:text="@tools:sample/full_names"
                     android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
@@ -46,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8sp"
                 android:textColor="@color/gray"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
                 tools:text="@tools:sample/lorem"/>
         </LinearLayout>

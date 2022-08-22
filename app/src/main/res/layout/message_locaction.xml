@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_sent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:background="@drawable/shape_image_sent"
+        android:outlineSpotShadowColor="@color/gray"
+        android:padding="2sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/user_map_sent"
+            android:layout_width="200sp"
+            android:layout_height="150sp"
+            android:src="@drawable/image_sent"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_sent">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/chat_user_message_time_sent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:background="@drawable/shape_time_alpha"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:paddingLeft="8sp"
+            android:paddingRight="8sp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/user_map_sent"
+            app:layout_constraintBottom_toBottomOf="@+id/user_map_sent"
+            tools:text="21:45" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_receive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/shape_image_receive"
+        android:outlineSpotShadowColor="@color/gray"
+        android:padding="2sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/user_map_receive"
+            android:layout_width="200sp"
+            android:layout_height="150sp"
+            android:src="@drawable/image_receive"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_receive">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/chat_user_message_time_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:background="@drawable/shape_time_alpha"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:paddingLeft="8sp"
+            android:paddingRight="8sp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/user_map_receive"
+            app:layout_constraintBottom_toBottomOf="@+id/user_map_receive"
+            tools:text="21:45" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

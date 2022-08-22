@@ -17,6 +17,7 @@
         android:paddingStart="8sp"
         android:padding="8sp"
         android:paddingBottom="8sp"
+        android:clipToPadding="false"
         app:flow_horizontalAlign="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

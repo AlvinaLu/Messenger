@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin">
+
+    <ImageView
+        android:id="@+id/btn_download_receive"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginBottom="8sp"
+        android:maxWidth="40sp"
+        android:maxHeight="40sp"
+        android:padding="8sp"
+        android:background="@drawable/shape_download"
+        android:outlineSpotShadowColor="@color/gray"
+        app:pressedTranslationZ="10dp"
+        app:rippleColor="@color/gray"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_download"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bloc_user_message_receive"
+        android:foregroundGravity="center_horizontal"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarReceive"
+        style="?android:attr/progressBarStyle"
+        android:background="@color/light_box"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginBottom="8sp"
+        android:max="100"
+        android:indeterminate="false"
+        android:progress="0"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bloc_user_message_receive"
+        android:foregroundGravity="center_horizontal"
+        />
+
+    <ImageView
+        android:id="@+id/btn_download_sent"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginBottom="8sp"
+        android:padding="8sp"
+        android:maxWidth="40sp"
+        android:maxHeight="40sp"
+        android:background="@drawable/shape_download"
+        android:outlineSpotShadowColor="@color/gray"
+        app:pressedTranslationZ="10dp"
+        app:rippleColor="@color/gray"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_download"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bloc_user_message_sent"
+        android:foregroundGravity="center_horizontal"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarSent"
+        style="?android:attr/progressBarStyle"
+        android:background="@color/light_box"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginStart="8sp"
+        android:layout_marginBottom="8sp"
+        android:max="100"
+        android:indeterminate="false"
+        android:progress="0"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bloc_user_message_sent"
+        android:foregroundGravity="center_horizontal"
+        />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_sent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:background="@drawable/shape_sent_message"
+        android:outlineSpotShadowColor="@color/gray"
+        android:paddingStart="8sp"
+        android:paddingEnd="8sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/chat_user_message_sent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:maxWidth="200sp"
+            android:paddingLeft="16sp"
+            android:paddingTop="16sp"
+            android:paddingRight="16sp"
+            android:textColor="#7E807F"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Привет я Юра" />
+
+        <TextView
+            android:id="@+id/chat_user_message_time_sent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingTop="4sp"
+            android:paddingRight="8sp"
+            android:paddingBottom="8sp"
+            android:textColor="#7E807F"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chat_user_message_sent"
+            tools:text="21:45"
+
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_receive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/shape_receive_message"
+        android:paddingEnd="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/chat_user_message_receive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:maxWidth="200sp"
+            android:paddingLeft="16sp"
+            android:paddingTop="16sp"
+            android:paddingRight="16sp"
+            android:textColor="#7E807F"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Привет я Юра" />
+
+        <TextView
+            android:id="@+id/chat_user_message_time_receive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingTop="4sp"
+            android:paddingRight="8sp"
+            android:paddingBottom="8sp"
+            android:textColor="#7E807F"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chat_user_message_receive"
+            tools:text="21:45" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

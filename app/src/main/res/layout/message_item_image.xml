@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_sent"
+        android:maxWidth="200sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:background="@drawable/shape_image_sent"
+        android:outlineSpotShadowColor="@color/gray"
+        android:padding="2sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/user_image_tmp_sent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="80sp"
+            android:minHeight="80sp"
+            android:maxWidth="200sp"
+            android:src="@drawable/image_sent"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_sent">
+        </ImageView>
+
+
+        <ImageView
+            android:id="@+id/user_image_sent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minWidth="80sp"
+            android:minHeight="80sp"
+            android:maxWidth="200sp"
+            android:src="@drawable/image_sent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_sent">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/chat_user_message_time_sent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:background="@drawable/shape_time_alpha"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:paddingLeft="8sp"
+            android:paddingRight="8sp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/user_image_sent"
+            app:layout_constraintBottom_toBottomOf="@+id/user_image_sent"
+            tools:text="21:45" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSent"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="center_vertical"
+            android:foregroundGravity="center_horizontal"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/light_tone"
+            android:max="100"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/bloc_user_message_sent"
+            app:layout_constraintEnd_toEndOf="@+id/bloc_user_message_sent"
+            app:layout_constraintStart_toStartOf="@+id/bloc_user_message_sent"
+            app:layout_constraintTop_toTopOf="@id/bloc_user_message_sent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_user_message_receive"
+        android:maxWidth="200sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:outlineSpotShadowColor="@color/gray"
+        android:background="@drawable/shape_image_receive"
+        android:padding="2sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/user_image_tmp_receive"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:maxWidth="200sp"
+            android:src="@drawable/image_receive"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_receive"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            ></ImageView>
+
+
+        <ImageView
+            android:id="@+id/user_image_receive"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:maxWidth="200sp"
+            android:src="@drawable/image_receive"
+            app:layout_constraintEnd_toEndOf="@id/chat_user_message_time_receive"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="gone"
+            ></ImageView>
+
+        <TextView
+            android:id="@+id/chat_user_message_time_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:background="@drawable/shape_time_alpha"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:paddingLeft="8sp"
+            android:paddingRight="8sp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/user_image_receive"
+            app:layout_constraintBottom_toBottomOf="@+id/user_image_receive"
+            tools:text="21:45" />
+
+        <ProgressBar
+            android:id="@+id/progressBarReceive"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:foregroundGravity="center_horizontal"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/bloc_user_message_receive"
+            app:layout_constraintEnd_toEndOf="@+id/bloc_user_message_receive"
+            app:layout_constraintStart_toStartOf="@+id/bloc_user_message_receive"
+            app:layout_constraintTop_toTopOf="@id/bloc_user_message_receive" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import com.android.example.messenger.data.local.AppPreferences
 import com.android.example.messenger.ui.auth.AuthInteractor
+import com.android.example.messenger.utils.SecureUtils
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -47,7 +48,10 @@ class LoginPresenterImpl(private val view: LoginView) : LoginPresenter,
      */
     override fun executeLogin(username: String, password: String) {
         view.showProgress()
-        interactor.login(username, password, this)
+        val hashPassword = SecureUtils.getSecurePassword(password)
+        if (hashPassword != null) {
+            interactor.login(username, hashPassword, this)
+        }
     }
 
     override fun putNotificationToken(token: String?) {

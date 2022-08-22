@@ -24,7 +24,8 @@
             android:fitsSystemWindows="true"
             app:collapsedTitleTextColor="@color/gray"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleTextAppearance="@android:color/transparent"
+            app:expandedTitleTextAppearance="@style/ActionBar.White"
+            app:collapsedTitleTextAppearance="@style/ActionBar.White"
             app:expandedTitleTextColor="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="?attr/colorPrimaryVariant"
@@ -43,6 +44,14 @@
                 android:src="@drawable/add_photo"
                 app:layout_collapseMode="parallax" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="90sp"
+                android:background="@drawable/shape_image_alpha"
+                android:layout_gravity="bottom"
+                />
+
+
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
                 style="@style/ActionBar.White"
@@ -53,7 +62,9 @@
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:menu="@menu/menu_setting"
-                app:title="MaterialToolbar" />
+                app:title="MaterialToolbar"
+                app:titleTextAppearance="@style/ActionBar.White"
+                app:titleTextColor="@color/gray"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -90,51 +101,63 @@
 
             <LinearLayout
                 android:id="@+id/text1"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="16sp"
+                android:layout_marginStart="16sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/light_tone"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Token: "/>
+                    android:textSize="20sp"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:text="Account "/>
 
                 <TextView
-                    android:id="@+id/text_setting"
+                    android:id="@+id/phone_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="dfkfkf"/>
+                    android:layout_margin="8sp"
+                    android:textSize="16sp"
+                    tools:text="+420 774 444 000"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_light_light" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:text="App information "/>
+
+                <TextView
+                    android:id="@+id/design_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8sp"
+                    android:textSize="16sp"
+                    android:text="@string/hypetlink"
+                    android:linksClickable="true"
+                    android:textColorLink="@color/blue" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_light_light" />
+
 
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/light_tone"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Token: "/>
-
-                <TextView
-                    android:id="@+id/token"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="dfkfkf"/>
 
 
-            </LinearLayout>
 
 
 

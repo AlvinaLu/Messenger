@@ -2,7 +2,7 @@ package com.android.example.messenger.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.android.example.messenger.data.vo.UserVO
+import com.android.example.messenger.data.response.UserVO
 
 class AppPreferences private constructor() {
 
@@ -21,6 +21,7 @@ class AppPreferences private constructor() {
 
     val accessToken: String?
         get() = preferences.getString("ACCESS_TOKEN", null)
+
 
     fun storeAccessToken(accessToken: String) {
         preferences.edit().putString("ACCESS_TOKEN", accessToken).apply()
@@ -59,4 +60,5 @@ class AppPreferences private constructor() {
         editor.apply()
     }
 }
+
 

@@ -17,7 +17,7 @@
         android:orientation="horizontal"
         android:paddingEnd="8sp"
         android:padding="8sp"
-        android:paddingBottom="8sp"
+        android:clipToPadding="false"
         app:flow_horizontalAlign="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_sent_message"
+            android:layout_margin="8sp"
             android:padding="8sp">
 
             <TextView

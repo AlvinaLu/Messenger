@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,119 +6,172 @@
     android:background="@color/light_box"
     tools:context="com.android.example.messenger.ui.chat.ChatActivity">
 
-    <View
-        android:id="@+id/shadow_view"
-        android:layout_width="match_parent"
-        android:layout_height="5sp"
-        android:background="@drawable/app_shadow"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <include layout="@layout/new_message_alarm"></include>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_messages"
-        android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_above="@+id/linear"
-        tools:listitem="@layout/row_receive_messages"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/shadow_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/linear"
-        android:layout_marginTop="5sp"
-        android:layout_marginBottom="5sp"
-        android:background="@color/light_box" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linear"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_above="@android:id/accessibilityActionScrollDown"
-        android:background="@drawable/shape_write_message"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rv_messages"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/light_box"
+        tools:context="com.android.example.messenger.ui.chat.ChatActivity">
 
-        <ImageButton
-            android:id="@+id/img_btn_smile"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="8sp"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="8sp"
-            android:background="@drawable/ic_emotesmile"
-            android:scrollbarSize="8sp" />
+        <View
+            android:id="@+id/shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="5sp"
+            android:background="@drawable/app_shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="8sp"
+            android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shadow_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_messages"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_above="@+id/linear"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
+            android:background="@color/light_box"
+            android:stackFromBottom="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/linear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/note"
+            tools:listitem="@layout/row_sent_messages" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_above="@android:id/accessibilityActionScrollDown"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_write_message"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rv_messages"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/img_btn_attach"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:layout_marginEnd="8sp"
+                android:background="@drawable/ic_attachment"
+                android:scrollbarSize="8sp" />
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30sp"
+                android:layout_marginBottom="20sp"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:gravity="center">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/et_message"
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="30sp"
                     android:layout_weight="1"
-                    android:background="@color/white"
-                    android:backgroundTint="@android:color/transparent"
-                    android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
-                    android:hint="@string/new_message"
-                    android:inputType="textCapSentences|textMultiLine"
-                    android:textColor="@color/gray"
-                    android:textColorHint="@color/gray"
-                    android:layout_gravity="center_vertical"/>
+                    android:gravity="center">
 
-                <ImageButton
-                    android:id="@+id/img_btn_smi"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/ic_attachment"
-                    android:scrollbarSize="8sp"
-                    android:textAlignment="textEnd" />
+                    <EditText
+                        android:id="@+id/et_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+                        android:hint="@string/new_message"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:textColor="@color/gray"
+                        android:textColorHint="@color/gray" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/blue" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/img_btn_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="8sp"
+                android:layout_marginEnd="8sp"
+                android:layout_marginBottom="8sp"
+                android:backgroundTint="@color/blue"
+                android:outlineSpotShadowColor="@color/gray"
+                app:layout_anchor="@id/app_bar"
+                app:pressedTranslationZ="10dp"
+                app:rippleColor="@color/gray"
+                app:srcCompat="@drawable/ic_group" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/img_btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:layout_marginStart="8sp"
-            android:layout_marginEnd="8sp"
-            android:layout_marginBottom="8sp"
-            android:backgroundTint="@color/blue"
-            android:outlineSpotShadowColor="@color/gray"
-            app:layout_anchor="@id/app_bar"
-            app:pressedTranslationZ="10dp"
-            app:rippleColor="@color/gray"
-            app:srcCompat="@drawable/ic_group"
-            android:layout_gravity="center_vertical"/>
+<!--        <ActionMenuView-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="200sp"-->
+<!--            android:layout_height="200sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:background="@color/blue">-->
+
+<!--        </ActionMenuView>-->
+        <!--    <Spinner-->
+        <!--        android:id="@+id/spinner"-->
+        <!--        android:layout_width="200sp"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:background="@color/blue"-->
+        <!--        android:visibility="visible"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+        <!--    </Spinner>-->
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include layout="@layout/choice_upload"></include>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

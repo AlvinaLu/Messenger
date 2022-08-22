@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_pinned"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4sp"
+    android:layout_marginRight="8sp"
+    android:background="@color/blue"
+    android:outlineSpotShadowColor="@color/gray"
+    android:padding="2sp"
+    app:cardElevation="4sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minWidth="190sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_margin="4sp"
+            tools:src="@tools:sample/avatars">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="9"
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2sp"
+                    android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    tools:text="Alvina Lushnikova7" />
+
+
+                <TextView
+                    android:id="@+id/tv_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2sp"
+                    android:fontFamily="@font/plusjakartasans_italic_variablefont_wght"
+                    android:textColor="@color/gray"
+                    android:textSize="11sp"
+                    tools:text="@tools:sample/lorem" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imb_pinned"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4sp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:foregroundGravity="right"
+            android:src="@drawable/ic_pinned_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

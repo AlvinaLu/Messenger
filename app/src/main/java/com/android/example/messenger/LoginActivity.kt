@@ -45,11 +45,11 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
     }
 
     override fun bindViews() {
-        etUsername = findViewById(R.id.et_username)
-        etPassword = findViewById(R.id.et_password)
-        btnLogin = findViewById(R.id.btn_login)
-        btnSignUp = findViewById(R.id.btn_sign_up)
-        progressBar = findViewById(R.id.progress_bar)
+        etUsername = findViewById(R.id.et_username_login)
+        etPassword = findViewById(R.id.et_password_login)
+        btnLogin = findViewById(R.id.btn_login_login)
+        btnSignUp = findViewById(R.id.btn_sign_up_login)
+        progressBar = findViewById(R.id.progress_bar_login)
         btnLogin.setOnClickListener(this)
         btnSignUp.setOnClickListener(this)
     }
@@ -76,18 +76,25 @@ class LoginActivity : AppCompatActivity(), LoginView, View.OnClickListener {
     }
 
     override fun navigateToSignUp() {
-        startActivity(Intent(this, SignUpActivity::class.java))
+        val intent = Intent(this, SignUpActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
+        finishAffinity()
+        finish()
     }
 
     override fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
+        finishAffinity()
         finish()
-        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onClick(view: View) {
-        if (view.id == R.id.btn_login) {
-            presenter.executeLogin(etUsername.text.toString(), etPassword.text.toString())
-        } else if (view.id == R.id.btn_sign_up) {
+        if (view.id == R.id.btn_login_login) {
+            presenter.executeLogin(etUsername.text.trim().toString(), etPassword.text.trim().toString())
+        } else if (view.id == R.id.btn_sign_up_login) {
             navigateToSignUp()
         }
     }

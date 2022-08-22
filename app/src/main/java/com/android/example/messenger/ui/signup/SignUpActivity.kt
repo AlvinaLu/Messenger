@@ -3,6 +3,7 @@ package com.android.example.messenger.ui.signup
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.example.messenger.R
 import com.android.example.messenger.data.local.AppPreferences
 import com.android.example.messenger.ui.main.MainActivity
+import com.rilixtech.widget.countrycodepicker.CountryCodePicker
 
 
 class SignUpActivity : AppCompatActivity(), SignUpView, View.OnClickListener {
 
     private lateinit var etUsername: EditText
     private lateinit var etPhoneNumber: EditText
+    private lateinit var ccp: CountryCodePicker
     private lateinit var etPassword: EditText
     private lateinit var btnSignUp: Button
     private lateinit var progressBar: ProgressBar
@@ -35,9 +38,11 @@ class SignUpActivity : AppCompatActivity(), SignUpView, View.OnClickListener {
     override fun bindViews() {
         etUsername = findViewById(R.id.et_username)
         etPhoneNumber = findViewById(R.id.et_phone)
+        ccp = findViewById(R.id.ccp)
         etPassword = findViewById(R.id.et_password)
         btnSignUp = findViewById(R.id.btn_sign_up)
         progressBar = findViewById(R.id.progress_bar)
+
         btnSignUp.setOnClickListener(this)
     }
 
@@ -50,14 +55,17 @@ class SignUpActivity : AppCompatActivity(), SignUpView, View.OnClickListener {
     }
 
     override fun navigateToHome() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
+        finishAffinity()
         finish()
-        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onClick(view: View) {
         if (view.id == R.id.btn_sign_up) {
-            presenter.executeSignUp(etUsername.text.toString(),
-                etPhoneNumber.text.toString(), etPassword.text.toString())
+            presenter.executeSignUp(etUsername.text.trim().toString(),
+                ccp.fullNumber.toString() + etPhoneNumber.text.trim().toString(), etPassword.text.trim().toString())
         }
     }
 

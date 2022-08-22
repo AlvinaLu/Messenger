@@ -1,34 +1,39 @@
 package com.android.example.messenger.ui.main
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
-import android.widget.Toast
-import com.android.example.messenger.R
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
+import com.android.example.messenger.ChatterApp
 import com.android.example.messenger.LoginActivity
+import com.android.example.messenger.R
 import com.android.example.messenger.data.local.AppPreferences
-import com.android.example.messenger.ui.experimental.ExperimentalActivity
+import com.android.example.messenger.databinding.ActivityMainBinding
+import com.android.example.messenger.services.CheckOnlineService
 import com.android.example.messenger.ui.setting.SettingsActivity
 
-class MainActivity : AppCompatActivity(), MainView {
 
-    private lateinit var llContainer: LinearLayout
-    lateinit var presenter: MainPresenter
-    private var toolbar : Toolbar? = null
+class MainActivity : AppCompatActivity() {
 
-    private val contactsFragment = ContactsFragment()
-    private val conversationsFragment = ConversationsFragment()
+    private var toolbar: Toolbar? = null
+    private var conversationsFragment = ConversationsFragment()
+    private var contactsFragment = ContactsFragment()
     lateinit var preferences: AppPreferences
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var mainViewModel: MainViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        presenter = MainPresenterImpl(this)
+        window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        preferences = AppPreferences.create(this)
+
 
         conversationsFragment.setActivity(this@MainActivity)
         contactsFragment.setActivity(this@MainActivity)
@@ -39,14 +44,23 @@ class MainActivity : AppCompatActivity(), MainView {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_chevronleft)
         supportActionBar?.elevation = 0F
 
-        preferences = AppPreferences.create(this)
+        mainViewModel = ViewModelProvider(
+            this, MainViewModel.MainViewModelFactory(
+                (this.applicationContext as ChatterApp).conversationsRepository,
+                (this.applicationContext as ChatterApp).contactsRepository,
+                (this.applicationContext as ChatterApp).messagesRepository,
+                (this.applicationContext as  ChatterApp).categoryRepository
+            )
+        )[MainViewModel::class.java]
 
-        bindViews()
+
         showConversationsScreen()
     }
 
-    override fun bindViews() {
-        llContainer = findViewById(R.id.ll_container)
+    private fun goToLogin() {
+        val login = Intent(this, LoginActivity::class.java)
+        login.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(login)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -54,89 +68,48 @@ class MainActivity : AppCompatActivity(), MainView {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun showConversationsLoadError() {
-        Toast.makeText(
-            this, "Unable to load conversations. Try again later.",
-            Toast.LENGTH_LONG
-        ).show()
-    }
 
-    override fun showContactsLoadError() {
-        Toast.makeText(
-            this, "Unable to load contacts. Try again later.",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.loadContacts()
-    }
-
-    override fun showConversationsScreen() {
+    fun showConversationsScreen() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.ll_container, conversationsFragment)
+        conversationsFragment?.let { fragmentTransaction.replace(R.id.ll_container, it) }
         fragmentTransaction.commit()
-
-        presenter.loadConversations()
-
         supportActionBar?.title = "Chatter"
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
     }
-
-    override fun showContactsScreen() {
+    fun showContactsScreen() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.ll_container, contactsFragment)
+        contactsFragment?.let { fragmentTransaction.replace(R.id.ll_container, it) }
         fragmentTransaction.commit()
-        presenter.loadContacts()
-
         supportActionBar?.title = "Contacts"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0F
     }
-
-    override fun showNoConversations() {
-        Toast.makeText(this, "You have no active conversations.", Toast.LENGTH_LONG).show()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             android.R.id.home -> showConversationsScreen()
             R.id.action_settings -> navigateToSettings()
-            R.id.action_experimental-> navigateToExperimental()
-            R.id.action_logout -> presenter.executeLogout()
+            R.id.action_logout -> {
+                mainViewModel.logOut()
+                preferences.clear()
+                goToLogin()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
-
-    override fun getContext(): Context {
-        return this
+    override fun onStart() {
+        super.onStart()
+        showConversationsScreen()
+        if (preferences.accessToken == null){goToLogin()}
+        val intent = Intent(this, CheckOnlineService::class.java)
+        intent.putExtra("token", preferences.accessToken as String)
+        this.startService(intent)
     }
 
-
-    override fun getContactsFragment(): ContactsFragment {
-        return contactsFragment
+    override fun onStop() {
+        super.onStop()
+        this.stopService(Intent(this, CheckOnlineService::class.java))
     }
-
-
-    override fun getConversationsFragment(): ConversationsFragment {
-        return conversationsFragment
-    }
-
-    override fun navigateToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-    }
-
-    override fun navigateToSettings() {
+    private fun navigateToSettings() {
         startActivity(Intent(this, SettingsActivity::class.java))
     }
-
-    override fun navigateToExperimental() {
-        startActivity(Intent(this, ExperimentalActivity::class.java))
-    }
-
-
-
 }

@@ -1,8 +1,6 @@
 package com.android.example.messenger.ui.setting
 
-import com.android.example.messenger.data.vo.ConversationVO
-import com.android.example.messenger.data.vo.MessageVO
-import com.android.example.messenger.data.vo.UserVO
+import com.android.example.messenger.data.response.UserVO
 
 interface SettingInteraction {
 
@@ -20,6 +18,5 @@ interface SettingInteraction {
 
     fun sendUrl(url: String, listener: OnUrlSendFinishedListener)
 
-    fun getUrl(userId: Long)
 
 }
