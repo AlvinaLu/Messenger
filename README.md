@@ -16,6 +16,8 @@ Technologies:
 * Kotlin
 * RoomDatabase
 * Retrofit
+* LiveData
+* Coroutines & Flow
 * Firebase Storage
 * Firebase Cloud Messaging
 
