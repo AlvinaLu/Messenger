@@ -20,7 +20,7 @@ Technologies:
 * Firebase Cloud Messaging
 
 
-
+<hr>
 <p align="center">
   <img src="https://firebasestorage.googleapis.com/v0/b/messenger-api-6d6b5.appspot.com/o/images%2Fdc6cdf42-36d4-4507-aaae-d10b6f383d91?alt=media&token=a37e86cb-4594-41d5-9d0e-499791a7105c" width="370" title="Main screen">
    <img src="https://firebasestorage.googleapis.com/v0/b/messenger-api-6d6b5.appspot.com/o/images%2F3de85a6f-2703-460f-85c1-0984ea870949?alt=media&token=ff351dcb-518b-4278-8d1b-6ab67e511601" width="370" title="Filtrable">
